@@ -35,11 +35,13 @@
 		conn.accept();
 	})
 
-	// How do I know who I'm calling???
+	// How do I know who I'm calling??? -- previously connect took no parameters so probably there is some default message that gets returned when you call
 
 	// Connect to Twilio when we call this function.
 	function call() {
-		Twilio.Device.connect();
+		// get the phone number to connect to
+		params = {"PhoneNumber": $("#number").val()};
+		Twilio.Device.connect(params);
 	}
 
 	// A function to end a connection to Twilio
@@ -57,6 +59,8 @@
 	<button class="hangup" onclick="hangup();">
 		Hangup
 	</button>
+
+	<input type="text" id="number" name="number" placeholder="Enter a phone number to call">
 
 	<div id="log">Loading pigeons...</div>
 

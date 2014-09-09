@@ -1,19 +1,30 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from twilio.util import TwilioCapability
 import twilio.twiml
+
+import re
 
 app = Flask(__name__)
 
 # Add a Twilio phone number of number verified with Twilio as the caller ID
 caller_id = "+14152179350"
 
+# Put default Twilio client name here, for when a phone number isn't given
+default_client = "jenny"
+
 @app.route('/voice', methods=['GET', 'POST'])
 def voice():
+	dest_number = request.values.get('PhoneNumber', None)
+
 	resp = twilio.twiml.Response()
 
 	# Nest <Client> TwiML inside of a <Dial> verb
 	with resp.dial(callerId=caller_id) as r:
-		r.client("jenny")
+		# If we havea number, and it looks like a phone number
+		if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
+			r.number(dest_number)
+		else:
+			r.client(default_client)
 
 	return str(resp)
 
