@@ -41,7 +41,7 @@
 	function call() {
 		// get the phone number to connect to
 		params = {"PhoneNumber": $("#number").val()};
-		Twilio.Device.connect(params);
+		var connection = Twilio.Device.connect(params);
 	}
 
 	// A function to end a connection to Twilio
@@ -61,6 +61,10 @@
 	</button>
 
 	<input type="text" id="number" name="number" placeholder="Enter a phone number to call">
+
+	{% for i in range(10) %}
+	<button id="btn{% i %}">{% i %}</button>
+	{% endfor %}
 
 	<div id="log">Loading pigeons...</div>
 
