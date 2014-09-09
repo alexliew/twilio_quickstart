@@ -12,7 +12,7 @@ app = Flask(__name__)
 caller_id = "+14153004127"
 
 # Put default Twilio client name here, for when a phone number isn't given
-default_client = "jenny"
+default_client = "jenney"
 
 @app.route('/voice', methods=['GET', 'POST'])
 def voice():
@@ -35,7 +35,7 @@ def voice():
 def client():
 	"""Respond to incoming requests."""
 
-	client_name = request.values.get('client', None) or "jenny"
+	client_name = request.values.get('client', None) or default_client
 
 	account_sid = "ACdb17aa016cef6c07c6cc64c90bfff660"
 	auth_token = "33e489cbe322c5c3eab7e0b42bfb2950"
