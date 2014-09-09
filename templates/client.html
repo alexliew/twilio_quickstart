@@ -72,7 +72,7 @@
 	<input type="text" id="number" name="number" placeholder="Enter a phone number to call">
 
 	{% for i in range(10) %}
-	<button id="btn{{ i }}" onclick="sendkey("{{ i }}")">{{ i }}</button>
+	<button id="btn{{ i }}" onclick="sendkey('{{ i }}')">{{ i }}</button>
 	{% endfor %}
 
 	<div id="log">Loading pigeons...</div>
