@@ -32,6 +32,8 @@ def voice():
 def client():
 	"""Respond to incoming requests."""
 
+	client_name = request.values.get('client', None) or "jenny"
+
 	account_sid = "ACdb17aa016cef6c07c6cc64c90bfff660"
 	auth_token = "33e489cbe322c5c3eab7e0b42bfb2950"
 
@@ -41,7 +43,7 @@ def client():
 	application_sid = "APabe7650f654fc34655fc81ae71caa3ff"
 	capability.allow_client_outgoing(application_sid)
 	# I love you Jenn-ey
-	capability.allow_client_incoming("jenny")
+	capability.allow_client_incoming(client_name)
 	token = capability.generate()
 
 	return render_template('client.html', token=token)
