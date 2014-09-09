@@ -24,7 +24,7 @@ def voice():
 		if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
 			r.number(dest_number)
 		else:
-			r.client(default_client)
+			r.client(dest_number)
 
 	return str(resp)
 
@@ -46,7 +46,7 @@ def client():
 	capability.allow_client_incoming(client_name)
 	token = capability.generate()
 
-	return render_template('client.html', token=token)
+	return render_template('client.html', token=token, client_name=client_name)
 
 if __name__ == "__main__":
     app.run(debug=True)
