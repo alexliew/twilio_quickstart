@@ -3,11 +3,13 @@ from twilio.util import TwilioCapability
 import twilio.twiml
 
 import re
+import logging
 
+logging.basicConfig(filename='log/debug.log', level=logging.DEBUG)
 app = Flask(__name__)
 
 # Add a Twilio phone number of number verified with Twilio as the caller ID
-caller_id = "+14152179350"
+caller_id = "+14153004127"
 
 # Put default Twilio client name here, for when a phone number isn't given
 default_client = "jenny"
@@ -24,7 +26,8 @@ def voice():
 		if dest_number and re.search('^[\d\(\)\- \+]+$', dest_number):
 			r.number(dest_number)
 		else:
-			r.client(dest_number)
+			r.client(default_client)
+	logging.info(str(resp))
 
 	return str(resp)
 
